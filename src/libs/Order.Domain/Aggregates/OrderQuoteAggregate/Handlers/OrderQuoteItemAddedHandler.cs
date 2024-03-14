@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace Order.Domain.Aggregates.OrderQuoteAggregate.Handlers
 {
-  public class OrderItemAddedHandler : INotificationHandler<OrderQouteItemAdded>
+  public class OrderQuoteItemAddedHandler : INotificationHandler<OrderQuoteItemAdded>
   {
     private readonly RequestQuoteApprovalService requestQuoteApprovalService;
 
-    public OrderItemAddedHandler(RequestQuoteApprovalService requestQuoteApprovalService)
+    public OrderQuoteItemAddedHandler(RequestQuoteApprovalService requestQuoteApprovalService)
     {
       this.requestQuoteApprovalService = requestQuoteApprovalService;
     }
 
-    public async Task Handle(OrderQouteItemAdded notification, CancellationToken cancellationToken)
+    public async Task Handle(OrderQuoteItemAdded notification, CancellationToken cancellationToken)
     {
       this.requestQuoteApprovalService.CheckApproval(notification.OrderQuote);
     }

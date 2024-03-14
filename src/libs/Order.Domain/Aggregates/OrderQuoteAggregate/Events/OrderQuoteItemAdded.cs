@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Order.Domain.Aggregates.OrderQuoteAggregate.Events
 {
-  public class OrderQouteItemAdded:INotification
+  public class OrderQuoteItemAdded:INotification
   {
     public  OrderQuote OrderQuote { get; init; }
 
-    public OrderQouteItemAdded(OrderQuote orderQuote)
+    public OrderQuoteItemAdded(OrderQuote orderQuote)
     {
       this.OrderQuote = orderQuote;
     }
