@@ -15,10 +15,6 @@ namespace OrderAPI.Data
             .Where(x => x.Entity.events != null && x.Entity.events.Any());
 
 
-            foreach (var entity in context.ChangeTracker
-                 .Entries<AggregateRoot>()) { 
-               var events =  entity.Entity.events.ToList();
-             }
 
             var entityEntries = entities as EntityEntry<AggregateRoot>[] ?? entities.ToArray();
             var domainEvents = entityEntries
@@ -27,18 +23,10 @@ namespace OrderAPI.Data
 
             entityEntries.ToList().ForEach(entity => entity.Entity.ClearEvents());
 
-            foreach (var domainEvent in domainEvents) { 
+            foreach (INotification domainEvent in domainEvents) { 
                 
                 mediator.Publish(domainEvent).GetAwaiter().GetResult();   
              }
-
-            //var tasks = domainEvents
-            //   .Select(async (domainEvent) =>
-            //   {
-            //       await mediator.Publish(domainEvent);
-            //   });
-
-
 
         }
     }

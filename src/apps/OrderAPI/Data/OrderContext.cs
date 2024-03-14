@@ -17,7 +17,7 @@ namespace OrderAPI.Data
         }
 
         public DbSet<OrderRequest> OrderRequests { get; set; }
-        public DbSet<OrderQuote> OrderQuoutes { get; set; }
+        public DbSet<OrderQuote> OrderQuotes { get; set; }
 
         public DbSet<Order.Domain.Aggregates.OrderAggregate.Entities.Order> Orders { get; set; }
 

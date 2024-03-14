@@ -1,7 +1,13 @@
 
 using Microsoft.EntityFrameworkCore;
+using Order.Domain.Aggregates.OrderAggregate.Repositories;
+using Order.Domain.Aggregates.OrderQuoteAggregate.Repositories;
+using Order.Domain.Aggregates.OrderQuoteAggregate.Services;
 using Order.Domain.Aggregates.OrderRequestAggregate.Entities;
+using Order.Domain.Aggregates.OrderRequestAggregate.Repositories;
+using Order.Domain.SeedWork;
 using OrderAPI.Data;
+using OrderAPI.Data.Repositories;
 
 namespace OrderAPI
 {
@@ -20,7 +26,7 @@ namespace OrderAPI
 
             builder.Services.AddDbContext<OrderContext>(opt =>
             {
-                opt.UseSqlServer(builder.Configuration.GetConnectionString("OrderDb"));
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("OrderDbSqlConn"));
             });
 
             builder.Services.AddMediatR(opt =>
@@ -28,7 +34,13 @@ namespace OrderAPI
                 opt.RegisterServicesFromAssemblyContaining<OrderRequest>();
             });
 
-            var app = builder.Build();
+      builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();
+      builder.Services.AddScoped<IOrderRequestRepository, EFOrderRequestRepository>();
+      builder.Services.AddScoped<IOrderQuoteRepository, EFOrderQouteRepository>();
+      builder.Services.AddScoped<IUnitOfWork, OrderUnitOfWork>();
+      builder.Services.AddScoped<RequestQuoteApprovalService>();
+
+      var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
