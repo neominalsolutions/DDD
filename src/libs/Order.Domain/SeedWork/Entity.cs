@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Order.Domain.SeedWork
 {
-    public abstract class Entity
-    {
-        public string Id { get; init; }
+  public abstract class Entity
+  {
+    public string Id { get; init; }
 
-        protected Entity()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
+    protected Entity()
+    {
+      Id = Guid.NewGuid().ToString();
     }
+
+    
+  }
 }

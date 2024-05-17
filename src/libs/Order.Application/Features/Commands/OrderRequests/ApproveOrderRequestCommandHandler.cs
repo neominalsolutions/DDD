@@ -31,7 +31,7 @@ namespace Order.Application.Features.Commands.OrderRequests
 
       req.Approve();
 
-      this.unitOfWork.Save();
+      this.unitOfWork.Commit();
 
     }
   }

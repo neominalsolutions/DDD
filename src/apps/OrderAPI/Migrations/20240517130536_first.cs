@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OrderAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class OrderContextInit : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "OrderQuoutes",
+                name: "OrderQuotes",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -23,7 +23,7 @@ namespace OrderAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderQuoutes", x => x.Id);
+                    table.PrimaryKey("PK_OrderQuotes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,9 +76,9 @@ namespace OrderAPI.Migrations
                 {
                     table.PrimaryKey("PK_OrderQuoteItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderQuoteItem_OrderQuoutes_OrderQuoteId",
+                        name: "FK_OrderQuoteItem_OrderQuotes_OrderQuoteId",
                         column: x => x.OrderQuoteId,
-                        principalTable: "OrderQuoutes",
+                        principalTable: "OrderQuotes",
                         principalColumn: "Id");
                 });
 
@@ -104,7 +104,7 @@ namespace OrderAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderItem",
+                name: "PurchaseOrderItem",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -114,22 +114,17 @@ namespace OrderAPI.Migrations
                     Unit = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     QuoteItemId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrderId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    PurchaseOrderId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderItem", x => x.Id);
+                    table.PrimaryKey("PK_PurchaseOrderItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderItem_Orders_OrderId",
-                        column: x => x.OrderId,
+                        name: "FK_PurchaseOrderItem_Orders_PurchaseOrderId",
+                        column: x => x.PurchaseOrderId,
                         principalTable: "Orders",
                         principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderItem_OrderId",
-                table: "OrderItem",
-                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderQuoteItem_OrderQuoteId",
@@ -140,14 +135,16 @@ namespace OrderAPI.Migrations
                 name: "IX_OrderRequestItem_OrderRequestId",
                 table: "OrderRequestItem",
                 column: "OrderRequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PurchaseOrderItem_PurchaseOrderId",
+                table: "PurchaseOrderItem",
+                column: "PurchaseOrderId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "OrderItem");
-
             migrationBuilder.DropTable(
                 name: "OrderQuoteItem");
 
@@ -155,13 +152,16 @@ namespace OrderAPI.Migrations
                 name: "OrderRequestItem");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "PurchaseOrderItem");
 
             migrationBuilder.DropTable(
-                name: "OrderQuoutes");
+                name: "OrderQuotes");
 
             migrationBuilder.DropTable(
                 name: "OrderRequests");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
         }
     }
 }

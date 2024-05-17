@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Order.Application.Features.Commands.OrderRequests;
+using Order.Domain.Aggregates.OrderAggregate.Entities;
 using Order.Domain.Aggregates.OrderAggregate.Repositories;
 using Order.Domain.Aggregates.OrderQuoteAggregate.Repositories;
 using Order.Domain.Aggregates.OrderQuoteAggregate.Services;
@@ -27,13 +28,13 @@ namespace OrderAPI
 
       builder.Services.AddDbContext<OrderContext>(opt =>
       {
-        opt.UseSqlServer(builder.Configuration.GetConnectionString("OrderDbSqlConn"));
+        opt.UseSqlServer(builder.Configuration.GetConnectionString("OrderDbWindowsConn"));
       });
 
       builder.Services.AddMediatR(opt =>
       {
         opt.RegisterServicesFromAssemblyContaining<OrderRequestCreateCommand>();
-
+        opt.RegisterServicesFromAssemblyContaining<PurchaseOrderItem>();
       });
 
       builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();

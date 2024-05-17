@@ -13,7 +13,7 @@ namespace OrderAPI.Data.Repositories
       this.orderContext = orderContext;
     }
 
-    public void Create(Order.Domain.Aggregates.OrderAggregate.Entities.Order root)
+    public void Create(Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrder root)
     {
       this.orderContext.Orders.Add(root);
     }
@@ -23,12 +23,12 @@ namespace OrderAPI.Data.Repositories
       throw new NotImplementedException();
     }
 
-    public List<Order.Domain.Aggregates.OrderAggregate.Entities.Order> FindAll()
+    public List<Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrder> FindAll()
     {
       throw new NotImplementedException();
     }
 
-    public Order.Domain.Aggregates.OrderAggregate.Entities.Order FindById(string Id)
+    public Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrder FindById(string Id)
     {
       throw new NotImplementedException();
     }
@@ -38,7 +38,7 @@ namespace OrderAPI.Data.Repositories
       throw new NotImplementedException();
     }
 
-    public void Update(Order.Domain.Aggregates.OrderAggregate.Entities.Order root)
+    public void Update(Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrder root)
     {
       throw new NotImplementedException();
     }

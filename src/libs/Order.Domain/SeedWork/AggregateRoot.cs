@@ -9,7 +9,7 @@ namespace Order.Domain.SeedWork
 {
     public abstract class AggregateRoot:Entity
     {
-       public readonly List<INotification> events = new List<INotification>();
+       public readonly IList<INotification> events = new List<INotification>();
 
         public void AddEvent(INotification @event)
         {

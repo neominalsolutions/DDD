@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace OrderAPI.Data.Config
 {
-    public class OrderConfig : IEntityTypeConfiguration<Order.Domain.Aggregates.OrderAggregate.Entities.Order>
+    public class OrderConfig : IEntityTypeConfiguration<Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrder>
     {
-        public void Configure(EntityTypeBuilder<Order.Domain.Aggregates.OrderAggregate.Entities.Order> builder)
+        public void Configure(EntityTypeBuilder<Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrder> builder)
         {
             builder.HasMany(x => x.Items);
             builder.OwnsOne(x => x.Status).Property(x => x.Name).HasColumnName("Status_Name");

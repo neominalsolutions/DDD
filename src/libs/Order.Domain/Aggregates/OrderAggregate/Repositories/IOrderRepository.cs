@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Order.Domain.Aggregates.OrderAggregate.Repositories
 {
-  public interface IOrderRepository : IRepository<Order.Domain.Aggregates.OrderAggregate.Entities.Order>
+  public interface IOrderRepository : IRepository<Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrder>
   {
   }
 }

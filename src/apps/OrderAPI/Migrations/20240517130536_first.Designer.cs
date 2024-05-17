@@ -12,8 +12,8 @@ using OrderAPI.Data;
 namespace OrderAPI.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    [Migration("20240313130109_OrderContextInit")]
-    partial class OrderContextInit
+    [Migration("20240517130536_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace OrderAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Order.Domain.Aggregates.OrderAggregate.Entities.Order", b =>
+            modelBuilder.Entity("Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrder", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -46,7 +46,7 @@ namespace OrderAPI.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Order.Domain.Aggregates.OrderAggregate.Entities.OrderItem", b =>
+            modelBuilder.Entity("Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrderItem", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -55,7 +55,7 @@ namespace OrderAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrderId")
+                    b.Property<string>("PurchaseOrderId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("QuoteItemId")
@@ -64,9 +64,9 @@ namespace OrderAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("PurchaseOrderId");
 
-                    b.ToTable("OrderItem");
+                    b.ToTable("PurchaseOrderItem");
                 });
 
             modelBuilder.Entity("Order.Domain.Aggregates.OrderQuoteAggregate.Entities.OrderQuote", b =>
@@ -83,7 +83,7 @@ namespace OrderAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderQuoutes");
+                    b.ToTable("OrderQuotes");
                 });
 
             modelBuilder.Entity("Order.Domain.Aggregates.OrderQuoteAggregate.Entities.OrderQuoteItem", b =>
@@ -145,11 +145,11 @@ namespace OrderAPI.Migrations
                     b.ToTable("OrderRequestItem");
                 });
 
-            modelBuilder.Entity("Order.Domain.Aggregates.OrderAggregate.Entities.Order", b =>
+            modelBuilder.Entity("Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrder", b =>
                 {
                     b.OwnsOne("Order.Domain.Aggregates.OrderAggregate.Types.OrderStatus", "Status", b1 =>
                         {
-                            b1.Property<string>("OrderId")
+                            b1.Property<string>("PurchaseOrderId")
                                 .HasColumnType("nvarchar(450)");
 
                             b1.Property<int>("Id")
@@ -161,27 +161,27 @@ namespace OrderAPI.Migrations
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("Status_Name");
 
-                            b1.HasKey("OrderId");
+                            b1.HasKey("PurchaseOrderId");
 
                             b1.ToTable("Orders");
 
                             b1.WithOwner()
-                                .HasForeignKey("OrderId");
+                                .HasForeignKey("PurchaseOrderId");
                         });
 
                     b.Navigation("Status")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Order.Domain.Aggregates.OrderAggregate.Entities.OrderItem", b =>
+            modelBuilder.Entity("Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrderItem", b =>
                 {
-                    b.HasOne("Order.Domain.Aggregates.OrderAggregate.Entities.Order", null)
+                    b.HasOne("Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrder", null)
                         .WithMany("Items")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("PurchaseOrderId");
 
                     b.OwnsOne("Order.Domain.Shared.Money", "ListPrice", b1 =>
                         {
-                            b1.Property<string>("OrderItemId")
+                            b1.Property<string>("PurchaseOrderItemId")
                                 .HasColumnType("nvarchar(450)");
 
                             b1.Property<decimal>("Amount")
@@ -193,17 +193,17 @@ namespace OrderAPI.Migrations
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("Currency");
 
-                            b1.HasKey("OrderItemId");
+                            b1.HasKey("PurchaseOrderItemId");
 
-                            b1.ToTable("OrderItem");
+                            b1.ToTable("PurchaseOrderItem");
 
                             b1.WithOwner()
-                                .HasForeignKey("OrderItemId");
+                                .HasForeignKey("PurchaseOrderItemId");
                         });
 
                     b.OwnsOne("Order.Domain.Shared.Quantity", "Quantity", b1 =>
                         {
-                            b1.Property<string>("OrderItemId")
+                            b1.Property<string>("PurchaseOrderItemId")
                                 .HasColumnType("nvarchar(450)");
 
                             b1.Property<string>("Unit")
@@ -215,12 +215,12 @@ namespace OrderAPI.Migrations
                                 .HasColumnType("int")
                                 .HasColumnName("Quantity");
 
-                            b1.HasKey("OrderItemId");
+                            b1.HasKey("PurchaseOrderItemId");
 
-                            b1.ToTable("OrderItem");
+                            b1.ToTable("PurchaseOrderItem");
 
                             b1.WithOwner()
-                                .HasForeignKey("OrderItemId");
+                                .HasForeignKey("PurchaseOrderItemId");
                         });
 
                     b.Navigation("ListPrice")
@@ -248,7 +248,7 @@ namespace OrderAPI.Migrations
 
                             b1.HasKey("OrderQuoteId");
 
-                            b1.ToTable("OrderQuoutes");
+                            b1.ToTable("OrderQuotes");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderQuoteId");
@@ -402,7 +402,7 @@ namespace OrderAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Order.Domain.Aggregates.OrderAggregate.Entities.Order", b =>
+            modelBuilder.Entity("Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrder", b =>
                 {
                     b.Navigation("Items");
                 });

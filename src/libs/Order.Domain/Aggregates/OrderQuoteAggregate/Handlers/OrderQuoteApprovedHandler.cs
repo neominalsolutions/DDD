@@ -26,9 +26,9 @@ namespace Order.Domain.Aggregates.OrderQuoteAggregate.Handlers
     {
       // Generate Order. And Save
 
-      var items = notification.OrderQuote.Items.Select(a => new OrderItem(a.Code, a.Quantity, a.ListPrice, notification.OrderQuote.Id));
+      var items = notification.OrderQuote.Items.Select(a => new PurchaseOrderItem(a.Code, a.Quantity, a.ListPrice, notification.OrderQuote.Id));
 
-      var order = Order.Domain.Aggregates.OrderAggregate.Entities.Order.Create(notification.OrderQuote.OrderRequestId, notification.OrderQuote.Id, items);
+      var order = Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrder.Create(notification.OrderQuote.OrderRequestId, notification.OrderQuote.Id, items);
 
       this.orderRepository.Create(order);
 

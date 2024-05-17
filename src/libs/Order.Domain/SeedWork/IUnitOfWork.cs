@@ -8,6 +8,6 @@ namespace Order.Domain.SeedWork
 {
   public interface IUnitOfWork
   {
-    void Save();
+    void Commit();
   }
 }

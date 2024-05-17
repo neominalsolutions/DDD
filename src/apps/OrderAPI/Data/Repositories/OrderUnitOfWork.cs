@@ -11,7 +11,7 @@ namespace OrderAPI.Data.Repositories
       this.orderContext = orderContext;
     }
 
-    public void Save()
+    public void Commit()
     {
       this.orderContext.SaveChanges();
     }

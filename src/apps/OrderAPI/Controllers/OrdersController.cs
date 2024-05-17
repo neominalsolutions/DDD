@@ -41,7 +41,7 @@ namespace OrderAPI.Controllers
 
 
       // 1. aşama
-      var request = OrderRequest.Create(new Money(1000, "TL"));
+      var request = OrderRequest.Create(new Money(1000000, "TL"));
       request.AddItem("P-01", new Quantity(1, "pieces"));
       request.AddItem("P-02", new Quantity(4, "boxes"));
       request.AddItem("P-03", new Quantity(3, "kg"));
@@ -49,7 +49,7 @@ namespace OrderAPI.Controllers
       orderRequestRepository.Create(request);
       request.Approve();
 
-      unitOfWork.Save();
+      unitOfWork.Commit();
 
 
 
@@ -68,7 +68,7 @@ namespace OrderAPI.Controllers
       orderQuoteRepository.Create(quote);
 
       quote.TransformAsOrder();
-      unitOfWork.Save();
+      unitOfWork.Commit();
 
       // manuel publish EF olmadığı durumda manuel olarak iş bitince gönderimle save işlemi öncesi çalıştırılmalıdır.
       //foreach (INotification @event in quote.events)

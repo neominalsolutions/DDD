@@ -38,7 +38,7 @@ namespace Order.Application.Features.Commands.OrderRequests
       orderRequestRepository.Create(orderRequest);
       // Integration Event ile başka microservice bildirim gönder.
 
-      unitOfWork.Save();
+      unitOfWork.Commit();
     }
   }
 }

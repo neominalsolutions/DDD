@@ -19,7 +19,7 @@ namespace OrderAPI.Data
         public DbSet<OrderRequest> OrderRequests { get; set; }
         public DbSet<OrderQuote> OrderQuotes { get; set; }
 
-        public DbSet<Order.Domain.Aggregates.OrderAggregate.Entities.Order> Orders { get; set; }
+        public DbSet<Order.Domain.Aggregates.OrderAggregate.Entities.PurchaseOrder> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

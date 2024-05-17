@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Order.Domain.Aggregates.OrderAggregate.Entities
 {
-    public class Order:AggregateRoot
+    public class PurchaseOrder:AggregateRoot
     {
         public string RequestId { get; set; }
         public string QuoteId { get; set; }
@@ -20,7 +20,7 @@ namespace Order.Domain.Aggregates.OrderAggregate.Entities
 
         public OrderStatus Status { get; private set; }
 
-        public ImmutableList<OrderItem> Items {get; private set; }
+        public ImmutableList<PurchaseOrderItem> Items {get; private set; }
 
         public Money TotalAmount
         {
@@ -37,12 +37,12 @@ namespace Order.Domain.Aggregates.OrderAggregate.Entities
             }
         }
 
-        public Order()
+        public PurchaseOrder()
         {
                 
         }
 
-        private Order(string requestId, string quoteId,IEnumerable<OrderItem> items) {
+        private PurchaseOrder(string requestId, string quoteId,IEnumerable<PurchaseOrderItem> items) {
             
             Items = items.ToImmutableList();
             Status = OrderStatus.Submitted;
@@ -53,9 +53,9 @@ namespace Order.Domain.Aggregates.OrderAggregate.Entities
 
         }  
 
-        public static Order Create(string requestId, string quoteId, IEnumerable<OrderItem> items)
+        public static PurchaseOrder Create(string requestId, string quoteId, IEnumerable<PurchaseOrderItem> items)
         {
-            return new Order(requestId, quoteId, items);
+            return new PurchaseOrder(requestId, quoteId, items);
         }
 
 

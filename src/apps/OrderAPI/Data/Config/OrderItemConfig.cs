@@ -4,9 +4,9 @@ using Order.Domain.Aggregates.OrderAggregate.Entities;
 
 namespace OrderAPI.Data.Config
 {
-    public class OrderItemConfig : IEntityTypeConfiguration<OrderItem>
+    public class OrderItemConfig : IEntityTypeConfiguration<PurchaseOrderItem>
     {
-        public void Configure(EntityTypeBuilder<OrderItem> builder)
+        public void Configure(EntityTypeBuilder<PurchaseOrderItem> builder)
         {
             builder.OwnsOne(x => x.ListPrice).Property(x => x.Amount).HasColumnName("ListPrice");
             builder.OwnsOne(x => x.ListPrice).Property(x => x.Currency).HasColumnName("Currency");

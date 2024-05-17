@@ -3,11 +3,11 @@ using Order.Domain.Shared;
 
 namespace Order.Domain.Aggregates.OrderAggregate.Entities
 {
-    public class OrderItem:Entity
+    public class PurchaseOrderItem:Entity
     {
-        public OrderItem() { }
+        public PurchaseOrderItem() { }
 
-        public OrderItem(string code, Quantity quantity, Money listPrice, string quoteItemId)
+        public PurchaseOrderItem(string code, Quantity quantity, Money listPrice, string quoteItemId)
         {
             this.Code = code;
             Quantity = quantity;
